@@ -5,7 +5,7 @@ import seekPalettes from '../data/seedPalettes';
 function App() {
   return (
     <div className="App">
-      <Palette palette={seekPalettes[0]} />
+      <Palette palette={seekPalettes[1]} />
     </div>
   );
 }
