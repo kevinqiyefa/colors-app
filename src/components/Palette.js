@@ -4,7 +4,6 @@ import ColorBox from './ColorBox';
 import '../styles/Palette.css';
 
 const Palette = ({ palette }) => {
-  console.log(palette);
   const colorBoxes = palette.colors.map(c => (
     <ColorBox key={c.name} background={c.color} name={c.name} />
   ));
