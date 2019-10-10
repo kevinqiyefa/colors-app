@@ -25,7 +25,7 @@ const generatePalette = ({ paletteName, id, emoji, colors }) => {
         rgb: chroma(scales[i]).css(),
         rgba: chroma(scales[i])
           .css()
-          .replace('rgba', 'rgba')
+          .replace('rgb', 'rgba')
           .replace(')', ',1.0)')
       });
     }
