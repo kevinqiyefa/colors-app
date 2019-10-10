@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import MiniPalette from './MiniPalette';
 
-const PaletteList = ({ palettes }) => {
+const PaletteList = ({ palettes, history }) => {
   const useStyles = makeStyles({
     root: {
       backgroundColor: 'blue',
@@ -37,6 +37,10 @@ const PaletteList = ({ palettes }) => {
 
   const classes = useStyles();
 
+  const goToPalette = id => {
+    history.push(`/palette/${id}`);
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -45,7 +49,11 @@ const PaletteList = ({ palettes }) => {
         </nav>
         <div className={classes.palettes}>
           {palettes.map(palette => (
-            <MiniPalette {...palette} key={palette.id} />
+            <MiniPalette
+              {...palette}
+              key={palette.id}
+              handleClick={() => goToPalette(palette.id)}
+            />
           ))}
         </div>
       </div>
@@ -54,7 +62,8 @@ const PaletteList = ({ palettes }) => {
 };
 
 PaletteList.propTypes = {
-  palettes: PropTypes.array
+  palettes: PropTypes.array,
+  history: PropTypes.object
 };
 
 export default PaletteList;

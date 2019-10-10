@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 
-const MiniPalette = ({ colors, paletteName, emoji }) => {
+const MiniPalette = ({ colors, paletteName, emoji, handleClick }) => {
   const useStyles = makeStyles({
     root: {
       backgroundColor: 'white',
@@ -53,7 +53,7 @@ const MiniPalette = ({ colors, paletteName, emoji }) => {
   ));
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={handleClick}>
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>
@@ -65,7 +65,8 @@ const MiniPalette = ({ colors, paletteName, emoji }) => {
 MiniPalette.propTypes = {
   colors: PropTypes.array,
   paletteName: PropTypes.string,
-  emoji: PropTypes.string
+  emoji: PropTypes.string,
+  handleClick: PropTypes.func
 };
 
 export default MiniPalette;

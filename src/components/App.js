@@ -19,7 +19,7 @@ function App() {
         <Route
           exact
           path="/"
-          render={() => <PaletteList palettes={seekPalettes} />}
+          render={props => <PaletteList palettes={seekPalettes} {...props} />}
         />
         <Route
           exact
