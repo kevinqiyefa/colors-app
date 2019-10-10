@@ -46,3 +46,8 @@
   margin-top: -3px;
   transform: none !important;
 }
+
+.select-container {
+  margin-left: auto;
+  margin-right: 1rem;
+}
