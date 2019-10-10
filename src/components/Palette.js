@@ -6,11 +6,12 @@ import NavBar from './NavBar';
 import '../styles/Palette.css';
 
 const Palette = ({ palette }) => {
+  const { colors, paletteName, emoji } = palette;
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState('hex');
 
-  const colorBoxes = palette.colors[level].map(c => (
-    <ColorBox key={c.name} background={c[format]} name={c.name} />
+  const colorBoxes = colors[level].map(c => (
+    <ColorBox key={c.id} background={c[format]} name={c.name} />
   ));
 
   return (
@@ -21,9 +22,11 @@ const Palette = ({ palette }) => {
         format={format}
         setFormat={setFormat}
       />
-      {/* Navbar goes here */}
       <div className="Palette-colors">{colorBoxes}</div>
-      {/* footer eventually */}
+      <footer className="Palette-footer">
+        {paletteName}
+        <span>{emoji}</span>
+      </footer>
     </div>
   );
 };
