@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Palette from './Palette';
 import seekPalettes from '../data/seedPalettes';
 import { generatePalette } from '../utils/ColorHelper';
+import PaletteList from './PaletteList';
 
 const findPalette = id => {
   return seekPalettes.find(function(palette) {
@@ -15,7 +16,11 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" render={() => <h1>PALETTE LIST GOES HERE</h1>} />
+        <Route
+          exact
+          path="/"
+          render={() => <PaletteList palettes={seekPalettes} />}
+        />
         <Route
           exact
           path="/palette/:id"
@@ -26,8 +31,6 @@ function App() {
           )}
         />
       </Switch>
-
-      {/* <Palette palette={generatePalette(seekPalettes[1])} /> */}
     </div>
   );
 }
