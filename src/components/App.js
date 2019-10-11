@@ -8,9 +8,7 @@ import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
 
 const findPalette = id => {
-  return seekPalettes.find(function(palette) {
-    return palette.id === id;
-  });
+  return seekPalettes.find(palette => palette.id === id);
 };
 
 function App() {
@@ -20,7 +18,14 @@ function App() {
         <Route
           exact
           path="/palette/:paletteId/:colorId"
-          render={props => <SingleColorPalette {...props} />}
+          render={props => (
+            <SingleColorPalette
+              colorId={props.match.params.colorId}
+              palette={generatePalette(
+                findPalette(props.match.params.paletteId)
+              )}
+            />
+          )}
         />
         <Route
           exact

@@ -46,4 +46,17 @@ const generateScales = (hexColor, numOfColors) => {
     .colors(numOfColors);
 };
 
-export { generatePalette };
+const gatherShades = (palette, colorToFilterBy) => {
+  let shades = [];
+  let allColors = palette.colors;
+
+  for (let key in allColors) {
+    shades = shades.concat(
+      allColors[key].filter(color => color.id === colorToFilterBy)
+    );
+  }
+  //return all shades of given color
+  return shades.slice(1);
+};
+
+export { generatePalette, gatherShades };

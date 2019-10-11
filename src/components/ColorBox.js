@@ -5,7 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import '../styles/ColorBox.css';
 
-const ColorBox = ({ background, name, singleColorPaletteURL }) => {
+const ColorBox = ({ background, name, singleColorPaletteURL, showLink }) => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -30,9 +30,11 @@ const ColorBox = ({ background, name, singleColorPaletteURL }) => {
 
           <button className="copy-button">Copy</button>
         </div>
-        <Link to={singleColorPaletteURL} onClick={e => e.stopPropagation()}>
-          <span className="more-color">More</span>
-        </Link>
+        {showLink && (
+          <Link to={singleColorPaletteURL} onClick={e => e.stopPropagation()}>
+            <span className="more-color">More</span>
+          </Link>
+        )}
       </div>
     </CopyToClipboard>
   );
@@ -41,7 +43,8 @@ const ColorBox = ({ background, name, singleColorPaletteURL }) => {
 ColorBox.propTypes = {
   background: PropTypes.string,
   name: PropTypes.string,
-  singleColorPaletteURL: PropTypes.string
+  singleColorPaletteURL: PropTypes.string,
+  showLink: PropTypes.bool
 };
 
 export default ColorBox;
