@@ -45,7 +45,7 @@
   opacity: 0;
 }
 
-.ColorBox > span {
+.more-color {
   background: rgba(255, 255, 255, 0.3);
   position: absolute;
   border: none;

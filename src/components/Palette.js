@@ -6,12 +6,17 @@ import NavBar from './NavBar';
 import '../styles/Palette.css';
 
 const Palette = ({ palette }) => {
-  const { colors, paletteName, emoji } = palette;
+  const { colors, paletteName, emoji, id } = palette;
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState('hex');
 
   const colorBoxes = colors[level].map(c => (
-    <ColorBox key={c.id} background={c[format]} name={c.name} />
+    <ColorBox
+      key={c.id}
+      background={c[format]}
+      name={c.name}
+      singleColorPaletteURL={`/palette/${id}/${c.id}`}
+    />
   ));
 
   return (

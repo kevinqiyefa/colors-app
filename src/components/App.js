@@ -5,6 +5,7 @@ import Palette from './Palette';
 import seekPalettes from '../data/seedPalettes';
 import { generatePalette } from '../utils/ColorHelper';
 import PaletteList from './PaletteList';
+import SingleColorPalette from './SingleColorPalette';
 
 const findPalette = id => {
   return seekPalettes.find(function(palette) {
@@ -16,6 +17,11 @@ function App() {
   return (
     <div className="App">
       <Switch>
+        <Route
+          exact
+          path="/palette/:paletteId/:colorId"
+          render={props => <SingleColorPalette {...props} />}
+        />
         <Route
           exact
           path="/"

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import '../styles/ColorBox.css';
 
-const ColorBox = ({ background, name }) => {
+const ColorBox = ({ background, name, singleColorPaletteURL }) => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -29,7 +30,9 @@ const ColorBox = ({ background, name }) => {
 
           <button className="copy-button">Copy</button>
         </div>
-        <span>More</span>
+        <Link to={singleColorPaletteURL} onClick={e => e.stopPropagation()}>
+          <span className="more-color">More</span>
+        </Link>
       </div>
     </CopyToClipboard>
   );
@@ -37,7 +40,8 @@ const ColorBox = ({ background, name }) => {
 
 ColorBox.propTypes = {
   background: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  singleColorPaletteURL: PropTypes.string
 };
 
 export default ColorBox;
