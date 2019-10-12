@@ -31,6 +31,13 @@
   box-sizing: border-box;
 }
 
+.ColorBox .light-text {
+  color: white;
+}
+.ColorBox .dark-text {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .ColorBox:hover .copy-button {
   opacity: 1;
   transition: 0.5s;
