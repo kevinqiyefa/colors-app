@@ -28,6 +28,7 @@ const Palette = ({ palette }) => {
         setLevel={setLevel}
         format={format}
         setFormat={setFormat}
+        showSlider
       />
       <div className="Palette-colors">{colorBoxes}</div>
       <PaletteFooter paletteName={paletteName} emoji={emoji} />

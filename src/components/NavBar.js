@@ -8,7 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import 'rc-slider/assets/index.css';
 import '../styles/NavBar.css';
 
-const NavBar = ({ level, setLevel, format, setFormat }) => {
+const NavBar = ({ level, setLevel, format, setFormat, showSlider }) => {
   const [open, setOpen] = useState(false);
 
   const handleFormatChanged = e => {
@@ -21,18 +21,20 @@ const NavBar = ({ level, setLevel, format, setFormat }) => {
       <div className="logo">
         <Link to="/">reactcolorpicker</Link>
       </div>
-      <div className="slider-container">
-        <span>Level: {level}</span>
-        <div className="slider">
-          <Slider
-            defaultValue={level}
-            min={100}
-            max={900}
-            step={100}
-            onAfterChange={lv => setLevel(lv)}
-          />
+      {showSlider && (
+        <div className="slider-container">
+          <span>Level: {level}</span>
+          <div className="slider">
+            <Slider
+              defaultValue={level}
+              min={100}
+              max={900}
+              step={100}
+              onAfterChange={lv => setLevel(lv)}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="select-container">
         <Select value={format} onChange={handleFormatChanged}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>
@@ -72,7 +74,8 @@ NavBar.propTypes = {
   level: PropTypes.number,
   setLevel: PropTypes.func,
   format: PropTypes.string,
-  setFormat: PropTypes.func
+  setFormat: PropTypes.func,
+  showSlider: PropTypes.bool
 };
 
 export default NavBar;
