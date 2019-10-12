@@ -8,6 +8,16 @@
   margin-bottom: -3.5px;
 }
 
+.SingleColorPalette .ColorBox {
+  height: 50%;
+}
+
+.ColorBox.go-back {
+  background-color: black;
+  position: relative;
+  cursor: default;
+}
+
 .ColorBox-container > span {
   position: absolute;
   width: 100%;
@@ -25,7 +35,8 @@
   opacity: 1;
   transition: 0.5s;
 }
-.copy-button {
+.copy-button,
+.back-button {
   width: 100px;
   height: 30px;
   position: absolute;
@@ -42,6 +53,9 @@
   text-transform: uppercase;
   text-align: center;
   border: none;
+  text-decoration: none;
+}
+.copy-button {
   opacity: 0;
 }
 
