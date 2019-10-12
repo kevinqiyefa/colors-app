@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ColorBox from './ColorBox';
 import NavBar from './NavBar';
+import PaletteFooter from './PaletteFooter';
 
 import '../styles/Palette.css';
 
@@ -29,10 +30,7 @@ const Palette = ({ palette }) => {
         setFormat={setFormat}
       />
       <div className="Palette-colors">{colorBoxes}</div>
-      <footer className="Palette-footer">
-        {paletteName}
-        <span>{emoji}</span>
-      </footer>
+      <PaletteFooter paletteName={paletteName} emoji={emoji} />
     </div>
   );
 };
