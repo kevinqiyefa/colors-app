@@ -17,7 +17,7 @@ const Palette = ({ palette }) => {
       background={c[format]}
       name={c.name}
       singleColorPaletteURL={`/palette/${id}/${c.id}`}
-      showLink
+      showingFullPalette
     />
   ));
 
