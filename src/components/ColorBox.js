@@ -159,7 +159,7 @@ const ColorBox = ({
           <p className={classes.copyText}>{background}</p>
         </div>
 
-        <div className="ColorBox-container">
+        <div>
           <div className={classes.boxContent}>
             <span className={classes.colorName}>{name}</span>
           </div>
