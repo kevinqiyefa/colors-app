@@ -3,21 +3,10 @@ import PropTypes from 'prop-types';
 import ColorBox from './ColorBox';
 import NavBar from './NavBar';
 import PaletteFooter from './PaletteFooter';
-import { makeStyles } from '@material-ui/styles';
+
+import useStyles from '../styles/PaletteStyles';
 
 const Palette = ({ palette }) => {
-  const useStyles = makeStyles({
-    singlePalette: {
-      height: '100vh',
-      display: 'flex',
-      flexDirection: 'column'
-    },
-
-    PaletteColors: {
-      height: '90%'
-    }
-  });
-
   const classes = useStyles();
 
   const { colors, paletteName, emoji, id } = palette;

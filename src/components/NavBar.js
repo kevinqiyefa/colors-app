@@ -6,9 +6,11 @@ import { Select, MenuItem, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 import 'rc-slider/assets/index.css';
-import '../styles/NavBar.css';
+import useStyles from '../styles/NavBarStyles';
 
 const NavBar = ({ level, setLevel, format, setFormat, showSlider }) => {
+  const classes = useStyles();
+
   const [open, setOpen] = useState(false);
 
   const handleFormatChanged = e => {
@@ -17,14 +19,14 @@ const NavBar = ({ level, setLevel, format, setFormat, showSlider }) => {
   };
 
   return (
-    <header className="Navbar">
-      <div className="logo">
+    <header className={classes.navbar}>
+      <div className={classes.logo}>
         <Link to="/">reactcolorpicker</Link>
       </div>
       {showSlider && (
-        <div className="slider-container">
+        <>
           <span>Level: {level}</span>
-          <div className="slider">
+          <div className={classes.slider}>
             <Slider
               defaultValue={level}
               min={100}
@@ -33,9 +35,9 @@ const NavBar = ({ level, setLevel, format, setFormat, showSlider }) => {
               onAfterChange={lv => setLevel(lv)}
             />
           </div>
-        </div>
+        </>
       )}
-      <div className="select-container">
+      <div className={classes.selectContainer}>
         <Select value={format} onChange={handleFormatChanged}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>
           <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
