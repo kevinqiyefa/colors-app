@@ -79,7 +79,12 @@ const useStyles = makeStyles(theme => ({
 function NewPaletteForm(props) {
   const classes = useStyles();
 
+  const defaultColors = ['purple', '#e15764'];
+
+  const [colors, setColors] = useState(defaultColors);
+
   const [open, setOpen] = useState(false);
+  const [curColor, setCurColor] = useState('teal');
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -87,6 +92,10 @@ function NewPaletteForm(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const addNewColor = () => {
+    setColors([...colors, curColor]);
   };
 
   return (
@@ -138,10 +147,15 @@ function NewPaletteForm(props) {
           </Button>
         </div>
         <ChromePicker
-          color="purple"
-          onChangeComplete={newColor => console.log(newColor)}
+          color={curColor}
+          onChangeComplete={newColor => setCurColor(newColor.hex)}
         />
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: curColor }}
+          onClick={addNewColor}
+        >
           Add Color
         </Button>
         <Divider />
@@ -152,6 +166,12 @@ function NewPaletteForm(props) {
         })}
       >
         <div className={classes.drawerHeader} />
+
+        <ul>
+          {colors.map(color => (
+            <li style={{ backgroundColor: color }}>{color}</li>
+          ))}
+        </ul>
       </main>
     </div>
   );
