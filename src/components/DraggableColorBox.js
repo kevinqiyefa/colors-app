@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 
 import useStyles from '../styles/DraggableColorBoxStyles';
 
-const DraggableColorBox = ({ color }) => {
+const DraggableColorBox = ({ color, name }) => {
   const classes = useStyles();
   return (
     <div className={classes.root} style={{ backgroundColor: color }}>
-      {color}
+      {name}
     </div>
   );
 };
 
 DraggableColorBox.propTypes = {
-  color: PropTypes.string
+  color: PropTypes.string,
+  name: PropTypes.string
 };
 
 export default DraggableColorBox;
