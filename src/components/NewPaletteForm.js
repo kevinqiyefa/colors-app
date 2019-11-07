@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function NewPaletteForm(props) {
+function NewPaletteForm({ savePalette, history }) {
   const classes = useStyles();
 
   const defaultColors = [{ color: 'blue', name: 'blue' }];
@@ -108,6 +108,17 @@ function NewPaletteForm(props) {
     setNewColorName('');
   };
 
+  const handleSavePalette = () => {
+    let newName = 'New Test Palette';
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, '-'),
+      colors
+    };
+    savePalette(newPalette);
+    history.push('/');
+  };
+
   useEffect(() => {
     ValidatorForm.addValidationRule('isColorNameUnique', value =>
       colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
@@ -127,6 +138,7 @@ function NewPaletteForm(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="default"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open
         })}
@@ -144,6 +156,13 @@ function NewPaletteForm(props) {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSavePalette}
+          >
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -212,8 +231,9 @@ function NewPaletteForm(props) {
   );
 }
 
-// NewPaletteForm.propTypes = {
-
-// }
+NewPaletteForm.propTypes = {
+  savePalette: PropTypes.func,
+  history: PropTypes.object
+};
 
 export default NewPaletteForm;

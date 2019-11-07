@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Palette from './Palette';
@@ -8,15 +8,27 @@ import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
 
-const findPalette = id => {
-  return seekPalettes.find(palette => palette.id === id);
-};
-
 function App() {
+  const [palettes, setPalettes] = useState(seekPalettes);
+
+  const savePalette = newPalette => {
+    setPalettes([...palettes, newPalette]);
+  };
+
+  const findPalette = id => {
+    return palettes.find(palette => palette.id === id);
+  };
+
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/palette/new" render={props => <NewPaletteForm />} />
+        <Route
+          exact
+          path="/palette/new"
+          render={props => (
+            <NewPaletteForm savePalette={savePalette} {...props} />
+          )}
+        />
         <Route
           exact
           path="/palette/:paletteId/:colorId"
@@ -32,7 +44,7 @@ function App() {
         <Route
           exact
           path="/"
-          render={props => <PaletteList palettes={seekPalettes} {...props} />}
+          render={props => <PaletteList palettes={palettes} {...props} />}
         />
         <Route
           exact
