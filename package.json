@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
     "@material-ui/styles": "^4.5.0",
+    "array-move": "^2.2.0",
     "chroma-js": "^2.0.6",
     "rc-slider": "^8.7.1",
     "react": "^16.10.2",
@@ -14,7 +15,8 @@
     "react-dom": "^16.10.2",
     "react-material-ui-form-validator": "^2.0.9",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "react-sortable-hoc": "^1.10.1"
   },
   "scripts": {
     "start": "react-scripts start",
