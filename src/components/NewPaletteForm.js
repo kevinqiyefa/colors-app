@@ -109,6 +109,10 @@ function NewPaletteForm({ savePalette, palettes, history }) {
     setNewColorName('');
   };
 
+  const removeColor = colorName => {
+    setColors(colors.filter(color => color.name !== colorName));
+  };
+
   const handleSavePalette = () => {
     let newName = newPaletteName;
     const newPalette = {
@@ -238,7 +242,12 @@ function NewPaletteForm({ savePalette, palettes, history }) {
         <div className={classes.drawerHeader} />
 
         {colors.map(({ color, name }) => (
-          <DraggableColorBox color={color} key={color} name={name} />
+          <DraggableColorBox
+            color={color}
+            key={color}
+            name={name}
+            removeColor={() => removeColor(name)}
+          />
         ))}
       </main>
     </div>
