@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
 function NewPaletteForm({ savePalette, palettes, history }) {
   const classes = useStyles();
 
-  const defaultColors = [{ color: 'blue', name: 'blue' }];
+  const defaultColors = palettes[0].colors;
 
   const [colors, setColors] = useState(defaultColors);
 
@@ -92,6 +92,9 @@ function NewPaletteForm({ savePalette, palettes, history }) {
   const [newPaletteName, setNewPaletteName] = useState('');
   const [open, setOpen] = useState(false);
   const [curColor, setCurColor] = useState('teal');
+
+  const maxColors = 20;
+  const paletteIsFull = colors.length >= maxColors;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -108,6 +111,14 @@ function NewPaletteForm({ savePalette, palettes, history }) {
     };
     setColors([...colors, newColor]);
     setNewColorName('');
+  };
+
+  const addRandomColor = () => {
+    //pick random color from existing palettes
+    const allColors = palettes.map(p => p.colors).flat();
+    var rand = (Math.random() * allColors.length) >> 0;
+    const randomColor = allColors[rand];
+    setColors([...colors, randomColor]);
   };
 
   const removeColor = colorName => {
@@ -206,10 +217,19 @@ function NewPaletteForm({ savePalette, palettes, history }) {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setColors([])}
+          >
             Clear Palette
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={addRandomColor}
+            disabled={paletteIsFull}
+          >
             Random Color
           </Button>
         </div>
@@ -233,9 +253,10 @@ function NewPaletteForm({ savePalette, palettes, history }) {
             variant="contained"
             color="primary"
             type="submit"
-            style={{ backgroundColor: curColor }}
+            style={{ backgroundColor: paletteIsFull ? 'grey' : curColor }}
+            disabled={paletteIsFull}
           >
-            Add Color
+            {paletteIsFull ? 'Palette Full' : 'Add Color'}
           </Button>
         </ValidatorForm>
       </Drawer>
