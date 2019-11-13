@@ -5,22 +5,19 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Drawer,
-  CssBaseline,
-  AppBar,
-  Toolbar,
   Typography,
   Divider,
   IconButton,
   Button
 } from '@material-ui/core';
 
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import arrayMove from 'array-move';
 
 import DraggableColorList from './DraggableColorList';
+import PaletteFormNav from './PaletteFormNav';
 
 const drawerWidth = 400;
 
@@ -89,7 +86,7 @@ function NewPaletteForm({ savePalette, palettes, history }) {
   const [colors, setColors] = useState(defaultColors);
 
   const [newColorName, setNewColorName] = useState('');
-  const [newPaletteName, setNewPaletteName] = useState('');
+
   const [open, setOpen] = useState(false);
   const [curColor, setCurColor] = useState('teal');
 
@@ -125,11 +122,10 @@ function NewPaletteForm({ savePalette, palettes, history }) {
     setColors(colors.filter(color => color.name !== colorName));
   };
 
-  const handleSavePalette = () => {
-    let newName = newPaletteName;
+  const handleSavePalette = newPaletteName => {
     const newPalette = {
-      paletteName: newName,
-      id: newName.toLowerCase().replace(/ /g, '-'),
+      paletteName: newPaletteName,
+      id: newPaletteName.toLowerCase().replace(/ /g, '-'),
       colors
     };
     savePalette(newPalette);
@@ -148,57 +144,21 @@ function NewPaletteForm({ savePalette, palettes, history }) {
       colors.every(({ color }) => color !== curColor)
     );
 
-    ValidatorForm.addValidationRule('isPaletteNameUnique', value =>
-      palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
-
     return () => {
       ValidatorForm.removeValidationRule('isColorNameUnique');
       ValidatorForm.removeValidationRule('isColorUnique');
-      ValidatorForm.removeValidationRule('isPaletteNameUnique');
     };
-  }, [colors, curColor, palettes]);
+  }, [colors, curColor]);
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        color="default"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
-          </Typography>
-
-          <ValidatorForm onSubmit={handleSavePalette}>
-            <TextValidator
-              label="Palette Name"
-              value={newPaletteName}
-              onChange={e => setNewPaletteName(e.target.value)}
-              validators={['required', 'isPaletteNameUnique']}
-              errorMessages={['Enter Palette Name', 'Name already used']}
-            />
-            <Button variant="contained" color="primary" type="submit">
-              Save Palette
-            </Button>
-          </ValidatorForm>
-        </Toolbar>
-      </AppBar>
+      <PaletteFormNav
+        classes={classes}
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        palettes={palettes}
+        handleSavePalette={handleSavePalette}
+      />
       <Drawer
         className={classes.drawer}
         variant="persistent"
