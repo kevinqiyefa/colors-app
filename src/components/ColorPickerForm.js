@@ -5,9 +5,13 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Button } from '@material-ui/core';
 
+import useStyles from '../styles/ColorPickerFormStyles';
+
 const ColorPickerForm = ({ paletteIsFull, addNewColor, colors }) => {
   const [curColor, setCurColor] = useState('teal');
   const [newColorName, setNewColorName] = useState('');
+
+  const classes = useStyles();
 
   useEffect(() => {
     ValidatorForm.addValidationRule('isColorNameUnique', value =>
@@ -38,6 +42,7 @@ const ColorPickerForm = ({ paletteIsFull, addNewColor, colors }) => {
       <ChromePicker
         color={curColor}
         onChangeComplete={newColor => setCurColor(newColor.hex)}
+        className={classes.picker}
       />
 
       <ValidatorForm onSubmit={handleSubmit}>
@@ -50,6 +55,10 @@ const ColorPickerForm = ({ paletteIsFull, addNewColor, colors }) => {
             'Color name must be unique',
             'Color already used!'
           ]}
+          className={classes.colorNameInput}
+          placeholder="Color Name"
+          variant="filled"
+          margin="normal"
         />
         <Button
           variant="contained"
@@ -57,6 +66,7 @@ const ColorPickerForm = ({ paletteIsFull, addNewColor, colors }) => {
           type="submit"
           style={{ backgroundColor: paletteIsFull ? 'grey' : curColor }}
           disabled={paletteIsFull}
+          className={classes.addColor}
         >
           {paletteIsFull ? 'Palette Full' : 'Add Color'}
         </Button>
