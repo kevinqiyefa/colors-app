@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -13,8 +13,8 @@ import {
   Button
 } from '@material-ui/core';
 
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { makeStyles } from '@material-ui/core/styles';
+import PaletteMetaForm from './PaletteMetaForm';
 
 const drawerWidth = 400;
 
@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     }),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '64px'
+    height: '64px',
+    alignItems: 'center'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -43,7 +44,15 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2)
   },
 
-  navBtns: {}
+  navBtns: {
+    marginRight: '1rem',
+    '& a': {
+      textDecoration: 'none'
+    }
+  },
+  button: {
+    margin: '0 0.5rem'
+  }
 }));
 
 const PaletteFormNav = ({
@@ -54,19 +63,10 @@ const PaletteFormNav = ({
 }) => {
   const classes = useStyles();
 
-  const [newPaletteName, setNewPaletteName] = useState('');
+  const [formShowing, setFormShowing] = useState(false);
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isPaletteNameUnique', value =>
-      palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
+  const hideForm = () => setFormShowing(false);
 
-    return () => {
-      ValidatorForm.removeValidationRule('isPaletteNameUnique');
-    };
-  }, [palettes]);
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -92,23 +92,30 @@ const PaletteFormNav = ({
           </Typography>
         </Toolbar>
         <div className={classes.navBtns}>
-          <ValidatorForm onSubmit={() => handleSavePalette(newPaletteName)}>
-            <TextValidator
-              label="Palette Name"
-              value={newPaletteName}
-              onChange={e => setNewPaletteName(e.target.value)}
-              validators={['required', 'isPaletteNameUnique']}
-              errorMessages={['Enter Palette Name', 'Name already used']}
-            />
-            <Button variant="contained" color="primary" type="submit">
-              Save Palette
-            </Button>
-          </ValidatorForm>
           <Link to="/">
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+            >
               Go Back
             </Button>
           </Link>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setFormShowing(true)}
+            className={classes.button}
+          >
+            Save
+          </Button>
+          {formShowing && (
+            <PaletteMetaForm
+              palettes={palettes}
+              handleSavePalette={handleSavePalette}
+              hideForm={hideForm}
+            />
+          )}
         </div>
       </AppBar>
     </div>
