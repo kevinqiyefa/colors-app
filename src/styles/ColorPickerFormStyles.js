@@ -7,9 +7,8 @@ export default makeStyles({
   },
   addColor: {
     width: '100%',
-    padding: '1rem',
-    marginTop: '1rem',
-    fontSize: '2rem'
+    marginTop: '0.5rem',
+    fontSize: '1.8rem'
   },
   colorNameInput: {
     width: '100%',

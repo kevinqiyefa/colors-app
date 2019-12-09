@@ -51,9 +51,12 @@ export default makeStyles(theme => ({
     alignItems: 'center'
   },
   buttons: {
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   button: {
-    width: '50%'
+    width: '49%',
+    padding: '0.5rem'
   }
 }));
