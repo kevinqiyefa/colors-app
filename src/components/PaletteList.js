@@ -6,7 +6,7 @@ import useStyles from '../styles/PaletteListStyles';
 
 import MiniPalette from './MiniPalette';
 
-const PaletteList = ({ palettes, history }) => {
+const PaletteList = ({ palettes, history, deletePalette }) => {
   const classes = useStyles();
 
   const goToPalette = id => {
@@ -26,6 +26,8 @@ const PaletteList = ({ palettes, history }) => {
               {...palette}
               key={palette.id}
               handleClick={() => goToPalette(palette.id)}
+              handleDelete={deletePalette}
+              id={palette.id}
             />
           ))}
         </div>
@@ -36,6 +38,7 @@ const PaletteList = ({ palettes, history }) => {
 
 PaletteList.propTypes = {
   palettes: PropTypes.array,
+  deletePalette: PropTypes.func,
   history: PropTypes.object
 };
 

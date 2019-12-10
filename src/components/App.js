@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Palette from './Palette';
@@ -15,17 +15,24 @@ function App() {
 
   const savePalette = newPalette => {
     setPalettes([...palettes, newPalette]);
-    syncLocalStorage();
   };
 
-  const syncLocalStorage = () => {
-    //save palettes to local storage
-    window.localStorage.setItem('palettes', JSON.stringify(palettes));
+  const deletePalette = id => {
+    setPalettes(palettes.filter(palette => palette.id !== id));
   };
 
   const findPalette = id => {
     return palettes.find(palette => palette.id === id);
   };
+
+  useEffect(() => {
+    function syncLocalStorage() {
+      //save palettes to local storage
+      window.localStorage.setItem('palettes', JSON.stringify(palettes));
+    }
+
+    syncLocalStorage();
+  }, [palettes]);
 
   return (
     <div className="App">
@@ -56,7 +63,13 @@ function App() {
         <Route
           exact
           path="/"
-          render={props => <PaletteList palettes={palettes} {...props} />}
+          render={props => (
+            <PaletteList
+              palettes={palettes}
+              {...props}
+              deletePalette={deletePalette}
+            />
+          )}
         />
         <Route
           exact
