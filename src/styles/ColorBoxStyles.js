@@ -18,11 +18,11 @@ const colorBoxStyles = (showingFullPalette, background) => {
       },
       [sizes.down('lg')]: {
         width: '25%',
-        height: showingFullPalette ? '20%' : '50%'
+        height: showingFullPalette ? '20%' : '33.3333%'
       },
       [sizes.down('md')]: {
         width: '50%',
-        height: showingFullPalette ? '10%' : '50%'
+        height: showingFullPalette ? '10%' : '20%'
       },
       [sizes.down('xs')]: {
         width: '100%',
@@ -123,7 +123,11 @@ const colorBoxStyles = (showingFullPalette, background) => {
         marginBottom: '0',
         padding: '1rem',
         textTransform: 'uppercase',
-        fontSize: '5rem'
+        fontSize: '5rem',
+
+        [sizes.down('xs')]: {
+          fontSize: '2.8rem'
+        }
       },
       '& p': {
         fontSize: '2rem',
