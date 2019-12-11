@@ -1,5 +1,6 @@
 import chroma from 'chroma-js';
 import { makeStyles } from '@material-ui/styles';
+import sizes from './sizes';
 
 const colorBoxStyles = (showingFullPalette, background) => {
   return makeStyles({
@@ -13,7 +14,19 @@ const colorBoxStyles = (showingFullPalette, background) => {
       marginBottom: '-3.5px',
       '&:hover button': {
         opacity: 1,
-        transition: '0.5s'
+        transition: 'all 0.5s'
+      },
+      [sizes.down('lg')]: {
+        width: '25%',
+        height: showingFullPalette ? '20%' : '50%'
+      },
+      [sizes.down('md')]: {
+        width: '50%',
+        height: showingFullPalette ? '10%' : '50%'
+      },
+      [sizes.down('xs')]: {
+        width: '100%',
+        height: showingFullPalette ? '5%' : '10%'
       }
     },
     copyText: {
