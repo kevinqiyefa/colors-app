@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
+import sizes from './sizes';
 
 export default makeStyles({
   navbar: {
@@ -20,6 +21,9 @@ export default makeStyles({
     '& a': {
       textDecoration: 'none',
       color: 'black'
+    },
+    [sizes.down('xs')]: {
+      display: 'none'
     }
   },
 
@@ -44,6 +48,9 @@ export default makeStyles({
       marginLeft: '-7px',
       marginTop: '-3px',
       transform: 'none !important'
+    },
+    [sizes.down('md')]: {
+      width: '150px'
     }
   },
 
