@@ -31,6 +31,7 @@ export default makeStyles({
     alignItems: 'flex-start',
     flexDirection: 'column',
     flexWrap: 'wrap',
+    margin: '1rem 0',
     [sizes.down('xl')]: {
       width: '80%'
     },

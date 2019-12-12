@@ -9,7 +9,7 @@ const MiniPalette = ({
   paletteName,
   emoji,
   handleClick,
-  handleDelete,
+  openDialog,
   id
 }) => {
   const classes = useStyles();
@@ -24,7 +24,7 @@ const MiniPalette = ({
 
   const deletePalette = e => {
     e.stopPropagation();
-    handleDelete(id);
+    openDialog(id);
   };
 
   return (
@@ -48,7 +48,7 @@ MiniPalette.propTypes = {
   paletteName: PropTypes.string,
   emoji: PropTypes.string,
   handleClick: PropTypes.func,
-  handleDelete: PropTypes.func,
+  openDialog: PropTypes.func,
   id: PropTypes.string
 };
 
