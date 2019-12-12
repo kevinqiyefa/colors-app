@@ -3,6 +3,15 @@ import sizes from './sizes';
 import bg from '../assets/bg.svg';
 
 export default makeStyles({
+  '@global': {
+    '.fade-exit': {
+      opacity: 1
+    },
+    '.fade-exit-active': {
+      opacity: 0,
+      transition: 'opacity 500ms ease-out'
+    }
+  },
   root: {
     height: '100vh',
     display: 'flex',
@@ -36,7 +45,7 @@ export default makeStyles({
     alignItems: 'center',
     color: 'white',
     '& a': {
-      color: 'white'
+      color: '#030303'
     }
   },
   palettes: {
