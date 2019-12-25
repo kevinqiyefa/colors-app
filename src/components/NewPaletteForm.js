@@ -12,9 +12,9 @@ import {
 } from '@material-ui/core';
 
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
 import arrayMove from 'array-move';
 
+import seedPalettes from '../data/seedPalettes';
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
@@ -23,7 +23,7 @@ import useStyles from '../styles/NewPaletteFormStyles';
 function NewPaletteForm({ savePalette, palettes, history }) {
   const classes = useStyles();
 
-  const defaultColors = palettes[0].colors;
+  const defaultColors = seedPalettes[0].colors;
 
   const [colors, setColors] = useState(defaultColors);
 
