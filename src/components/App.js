@@ -7,8 +7,8 @@ import { generatePalette } from '../utils/ColorHelper';
 import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import Page from './Page';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
+// import Page from './Page';
 
 function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
@@ -37,69 +37,66 @@ function App() {
   }, [palettes]);
 
   return (
-    <Route
-      render={({ location }) => (
-        <TransitionGroup>
-          <CSSTransition key={location.key} classNames="page" timeout={500}>
-            <Switch location={location}>
-              <Route
-                exact
-                path="/palette/new"
-                render={props => (
-                  <Page>
-                    <NewPaletteForm
-                      savePalette={savePalette}
-                      palettes={palettes}
-                      {...props}
-                    />
-                  </Page>
-                )}
-              />
-              <Route
-                exact
-                path="/palette/:paletteId/:colorId"
-                render={props => (
-                  <Page>
-                    <SingleColorPalette
-                      colorId={props.match.params.colorId}
-                      palette={generatePalette(
-                        findPalette(props.match.params.paletteId)
-                      )}
-                    />
-                  </Page>
-                )}
-              />
-              <Route
-                exact
-                path="/"
-                render={props => (
-                  <Page>
-                    <PaletteList
-                      palettes={palettes}
-                      {...props}
-                      deletePalette={deletePalette}
-                    />
-                  </Page>
-                )}
-              />
-              <Route
-                exact
-                path="/palette/:id"
-                render={routeProps => (
-                  <Page>
-                    <Palette
-                      palette={generatePalette(
-                        findPalette(routeProps.match.params.id)
-                      )}
-                    />
-                  </Page>
-                )}
-              />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-      )}
-    />
+    // <Route
+    //   render={({ location }) => (
+    //     <TransitionGroup>
+    //       <CSSTransition key={location.key} classNames="page" timeout={300}>
+    // <Switch location={location}>
+    <Switch>
+      <Route
+        exact
+        path="/palette/new"
+        render={props => (
+          // <Page>
+          <NewPaletteForm
+            savePalette={savePalette}
+            palettes={palettes}
+            {...props}
+          />
+          // </Page>
+        )}
+      />
+      <Route
+        exact
+        path="/palette/:paletteId/:colorId"
+        render={props => (
+          // <Page>
+          <SingleColorPalette
+            colorId={props.match.params.colorId}
+            palette={generatePalette(findPalette(props.match.params.paletteId))}
+          />
+          // </Page>
+        )}
+      />
+      <Route
+        exact
+        path="/"
+        render={props => (
+          // <Page>
+          <PaletteList
+            palettes={palettes}
+            {...props}
+            deletePalette={deletePalette}
+          />
+          // </Page>
+        )}
+      />
+      <Route
+        exact
+        path="/palette/:id"
+        render={routeProps => (
+          // <Page>
+          <Palette
+            palette={generatePalette(findPalette(routeProps.match.params.id))}
+          />
+          //</Page>
+        )}
+      />
+    </Switch>
+    //   </CSSTransition>
+    // </TransitionGroup>
+    // )}
+    // />
   );
 }
 

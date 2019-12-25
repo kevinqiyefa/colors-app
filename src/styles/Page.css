@@ -3,7 +3,7 @@
   position: fixed;
   width: 100%;
   top: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 .page-enter {
   opacity: 0;
