@@ -49,7 +49,7 @@ export default makeStyles({
       marginTop: '-3px',
       transform: 'none !important'
     },
-    [sizes.down('md')]: {
+    [sizes.down('sm')]: {
       width: '150px'
     }
   },

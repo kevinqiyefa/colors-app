@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import clsx from 'clsx';
+
 import colorBoxStyles from '../styles/ColorBoxStyles';
 
 const ColorBox = ({
@@ -22,12 +24,16 @@ const ColorBox = ({
     <CopyToClipboard text={background} onCopy={() => setCopied(true)}>
       <div className={classes.ColorBox} style={{ backgroundColor: background }}>
         <div
-          className={`${classes.copyOverlay} ${copied && classes.showOverlay}`}
+          className={clsx(classes.copyOverlay, {
+            [classes.showOverlay]: copied
+          })}
           style={{ backgroundColor: background }}
         />
 
         <div
-          className={`${classes.copyMessage} ${copied && classes.showMessage}`}
+          className={clsx(classes.copyMessage, {
+            [classes.showMessage]: copied
+          })}
         >
           <h1>copied!</h1>
           <p className={classes.copyText}>{background}</p>
